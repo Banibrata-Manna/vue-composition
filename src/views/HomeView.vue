@@ -2,6 +2,8 @@
   <div class="home">
     <p ref="para"> Hello My Name is {{ name }} and age is {{ age }}</p>
     <button @click="handleClick">Click Me</button>
+    <button @click="increamentAge">Increment Age</button>
+    <input type="text" v-model="name"/>
   </div>
 </template>
 
@@ -24,23 +26,30 @@ export default {
 
 
     // valuse defined here are not reactive as in data() { } property.
-    let name = 'Banibrata Manna';
-    let age = 25;
+    const name = ref('Banibrata Manna');
+    const age = ref(25);
+    // These variables being const doesn't mean that these can't be changedd or are constant, it means only the references to the variables are contant and their values can still change.
 
     const handleClick = () => {
       if (para.value) {
         para.value.style.color = 'red';
         para.value.style.fontSize = '30px';
         para.value.style.fontWeight = 'bold';
-        para.value.textContent = 'Button Clicked. Name is Sonu and age is 24';
+        name.value = 'Bani';
+        age.value = 24;
       }
     };
+    const increamentAge = () => {
+      if (age.value) {
+        age.value++;
+      }
+    }
 
     return {
       // name: name,
       // age: age
       name, age, handleClick,
-      para
+      para, increamentAge
     };
   }
 }
