@@ -3,8 +3,12 @@
       <input v-model="firstname" placeholder="First Name" />
       <input v-model="lastname" placeholder="Last Name" />
       <input v-model.number="age" type="number" placeholder="Age (optional)" />
+      <input ref="templateRefInput" placeholder="Template Ref demo"/>
+      <button @click="setTemplateRef">Set Template Ref</button>
       <p>Your name is: {{ firstname }} {{ lastname }}</p>
       <p>Your username is: {{ username }}</p><p v-if="age"> and your age is {{ age }}</p>
+      <p>Template Ref value is: {{ templateRefInput?.value }}</p>
+      <!-- The safe navigation because the templateRefInput might not be set on the time on DOM Loaded -->
   </div>
 </template>
 
@@ -24,6 +28,11 @@ export default {
     const firstname = ref('');
     const lastname = ref('');
     const age = ref(null);
+    const templateRefInput = ref(null);
+
+    function setTemplateRef() {
+      templateRefInput.value = templateRefInput.value.value; // This extra .value you see here is the one from the DOM Input Element.
+    }
 
     const username = computed(() => {
       return firstname.value.trim().replace(/\s+/g, '').toLowerCase() + '.' + lastname.value.trim().replace(/\s+/g, '').toLowerCase();
@@ -50,7 +59,9 @@ export default {
       firstname,
       lastname,
       username,
-      age
+      age,
+      templateRefInput,
+      setTemplateRef
     };
   }
 }
