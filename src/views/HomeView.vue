@@ -16,6 +16,13 @@
       </button>
     </div>
 
+    <div>
+      <h3>Bike Details:</h3>
+      <p>Brand: {{ bike.brand }}, Old Brand: {{ oldBrand }}</p>
+      <p>Model: {{ bike.model }}, Old Model: {{ oldModel }}</p>
+      <p>Year: {{ bike.year }}, Old Year: {{ oldYear }}</p>
+    </div>
+
     <input type="text" v-model="search" placeholder="Search names..."/>
     <p>Searched Text: {{ search }}</p>
     <p v-for="name in matchingNames" :key="name">{{ name }}</p>
@@ -23,7 +30,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, toRefs } from 'vue';
 
 
 export default {
@@ -78,6 +85,22 @@ export default {
 
     const search = ref('');
 
+    const bike = reactive({
+      brand: 'Yamaha',
+      model: 'MT-07',
+      year: 2020
+    });
+
+    const { brand, model, year } = bike; // These are not reactive.
+
+    // const { brand, model, year } = toRefs(bike); // These are reactive.
+
+    setTimeout(() => {
+      bike.brand = 'Honda';
+      bike.model = 'CBR600RR';
+      bike.year = 2021;
+    }, 2000);
+
     const names = ref(['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Judy']);
 
     const matchingNames = computed(() => {
@@ -89,7 +112,7 @@ export default {
       // age: age
       name, age, handleClick,
       para, increamentAge, userTwo, updateUserTwo, userThree, updateUserThree,
-      search, matchingNames
+      search, matchingNames, bike, oldBrand: brand, oldModel: model, oldYear: year
     };
   }
 }
