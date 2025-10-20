@@ -15,11 +15,15 @@
         Update User Three
       </button>
     </div>
+
+    <input type="text" v-model="search" placeholder="Search names..."/>
+    <p>Searched Text: {{ search }}</p>
+    <p v-for="name in matchingNames" :key="name">{{ name }}</p>
   </div>
 </template>
 
 <script>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 
 
 export default {
@@ -72,11 +76,20 @@ export default {
       }
     }
 
+    const search = ref('');
+
+    const names = ref(['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan', 'Judy']);
+
+    const matchingNames = computed(() => {
+      return names.value.filter(n => n.includes(search.value));
+    });
+
     return {
       // name: name,
       // age: age
       name, age, handleClick,
-      para, increamentAge, userTwo, updateUserTwo, userThree, updateUserThree
+      para, increamentAge, userTwo, updateUserTwo, userThree, updateUserThree,
+      search, matchingNames
     };
   }
 }
