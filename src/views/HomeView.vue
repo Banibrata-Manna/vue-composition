@@ -5,6 +5,14 @@
       <p>{{ "=========================== User Data Component ============================" }}</p>
       <user-data :firstname="firstname" :lastname="lastname" :age="age"/>
       <p>{{ "=========================== User Data Component ============================" }}</p>
+      <div>Are you married?
+        <label>
+          <input type="radio" value="Yes" v-model="isMarried"/>Yes
+        </label>
+        <label>
+          <input type="radio" value="No" v-model="isMarried"/>No
+        </label>
+      </div>
       <input v-model.number="age" type="number" placeholder="Age (optional)" />
       <input ref="templateRefInput" placeholder="Template Ref demo"/>
       <button @click="setTemplateRef">Set Template Ref</button>
@@ -16,7 +24,7 @@
 </template>
 
 <script>
-import { computed, ref, watch } from 'vue';
+import { computed, provide, ref, watch } from 'vue';
 import UserData from '@/components/UserData.vue';
 
 export default {
@@ -35,6 +43,9 @@ export default {
     const lastname = ref('');
     const age = ref(null);
     const templateRefInput = ref(null);
+    const isMarried = ref(null);
+
+    provide('isUserMarried', isMarried);
 
     function setTemplateRef() {
       templateRefInput.value = templateRefInput.value.value; // This extra .value you see here is the one from the DOM Input Element.
@@ -43,6 +54,10 @@ export default {
     const username = computed(() => {
       return firstname.value.trim().replace(/\s+/g, '').toLowerCase() + '.' + lastname.value.trim().replace(/\s+/g, '').toLowerCase();
     });
+
+    // watch(isMarried, (newVal) => {
+    //   console.log('Marital status changed to: ', newVal, " and it's type is: ", typeof newVal);
+    // });
 
     watch(age, (newAge) => {
       if (newAge !== null && (isNaN(newAge) || newAge < 0)) {
@@ -67,7 +82,8 @@ export default {
       username,
       age,
       templateRefInput,
-      setTemplateRef
+      setTemplateRef,
+      isMarried
     };
   }
 }

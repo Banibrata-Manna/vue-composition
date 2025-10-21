@@ -1,10 +1,11 @@
 <template>
     <h2>Username: {{ username }}</h2>
     <h3>Age: {{ age }}</h3>
+    <h3>Married: {{ isUserMarried }}</h3>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, inject, watch } from 'vue';
 
     export default{
         props: ['firstname', 'lastname', 'age'],
@@ -16,13 +17,20 @@ import { computed } from 'vue';
                 return props.age;
             });
 
+            const isUserMarried = inject('isUserMarried');
+
+            // watch(isUserMarried, (newVal) => {
+            //     console.log('User marital status in UserData component changed to: ', newVal, " and it's type is: ", typeof newVal);
+            // });
+
             // console.log("This is the context in User Data Component: ", context);
 
             // context.emit('custom-event', 'Data from UserData Component');
 
             return {
                 username,
-                age
+                age,
+                isUserMarried
             }
         }
     }
