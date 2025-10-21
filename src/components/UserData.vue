@@ -8,13 +8,17 @@ import { computed } from 'vue';
 
     export default{
         props: ['firstname', 'lastname', 'age'],
-        setup(props) {
+        setup(props, context) {
             const username = computed(() => {
                 return props.firstname.trim().replace(/\s+/g, '').toLowerCase() + '.' + props.lastname.trim().replace(/\s+/g, '').toLowerCase();
             });
             const age = computed(() => {
                 return props.age;
             });
+
+            // console.log("This is the context in User Data Component: ", context);
+
+            // context.emit('custom-event', 'Data from UserData Component');
 
             return {
                 username,
