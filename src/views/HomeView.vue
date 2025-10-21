@@ -45,7 +45,7 @@ export default {
     const templateRefInput = ref(null);
     const isMarried = ref(null);
 
-    provide('isUserMarried', isMarried);
+    provide('isUserMarried', isMarried); // In any case, prefer to change the value where it is provided.
 
     function setTemplateRef() {
       templateRefInput.value = templateRefInput.value.value; // This extra .value you see here is the one from the DOM Input Element.

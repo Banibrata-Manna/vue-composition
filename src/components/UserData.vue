@@ -17,7 +17,7 @@ import { computed, inject, watch } from 'vue';
                 return props.age;
             });
 
-            const isUserMarried = inject('isUserMarried');
+            const isUserMarried = inject('isUserMarried'); // It is always prefered to change these values where they were provided.
 
             // watch(isUserMarried, (newVal) => {
             //     console.log('User marital status in UserData component changed to: ', newVal, " and it's type is: ", typeof newVal);
