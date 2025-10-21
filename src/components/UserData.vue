@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { computed, inject, watch } from 'vue';
+import { computed, inject, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated, watch } from 'vue';
 
     export default{
         props: ['firstname', 'lastname', 'age'],
@@ -26,6 +26,26 @@ import { computed, inject, watch } from 'vue';
             // console.log("This is the context in User Data Component: ", context);
 
             // context.emit('custom-event', 'Data from UserData Component');
+
+            onBeforeMount(function() {
+                console.log('UserData Component is about to be mounted.');
+            });
+
+            onMounted(function() {
+                console.log('UserData Component has been mounted.');
+            });
+
+            onBeforeUpdate(function() {
+                console.log('UserData Component is about to be updated.');
+            });
+
+            onUpdated(function() {
+                console.log('UserData Component has been updated.');
+            });
+
+            onBeforeUnmount(function() {
+                console.log('UserData Component is about to be unmounted.');
+            });
 
             return {
                 username,
