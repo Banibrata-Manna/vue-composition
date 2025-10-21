@@ -2,6 +2,9 @@
   <div class="home">
       <input v-model="firstname" placeholder="First Name" />
       <input v-model="lastname" placeholder="Last Name" />
+      <p>{{ "=========================== User Data Component ============================" }}</p>
+      <user-data :firstname="firstname" :lastname="lastname" :age="age"/>
+      <p>{{ "=========================== User Data Component ============================" }}</p>
       <input v-model.number="age" type="number" placeholder="Age (optional)" />
       <input ref="templateRefInput" placeholder="Template Ref demo"/>
       <button @click="setTemplateRef">Set Template Ref</button>
@@ -14,10 +17,13 @@
 
 <script>
 import { computed, ref, watch } from 'vue';
-
+import UserData from '@/components/UserData.vue';
 
 export default {
   name: 'HomeView',
+  components: {
+    UserData
+  },
   mounted() {
     // Logic to run when the component is mounted
   },
