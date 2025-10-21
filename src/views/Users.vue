@@ -13,7 +13,6 @@ import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'User',
-  props: ['userId'],
   setup(props) {
     const router = useRouter();
     const users = [
