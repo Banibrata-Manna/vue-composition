@@ -21,6 +21,7 @@
       <p>Template Ref value is: {{ templateRefInput?.value }}</p>
       <!-- The safe navigation because the templateRefInput might not be set on the time on DOM Loaded -->
   </div>
+  <router-link to="/users">Go to Users Page</router-link>
 </template>
 
 <script>
